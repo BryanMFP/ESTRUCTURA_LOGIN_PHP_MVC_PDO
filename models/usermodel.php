@@ -1,5 +1,6 @@
 <?php
 
+require 'libs/imodel.php';
 require_once 'domain/userD.php';
 
 class UserModel extends UserD implements IModel
@@ -15,14 +16,18 @@ class UserModel extends UserD implements IModel
     {
         try 
         {
+            $username        = $this->getUsername();
+            $secret_password = $this->getSecretPassword();
+            $completeName    = $this->getCompleteName();
+            $idRole            = $this->getIdRole();
 
             $stmt = $this->prepares("INSERT INTO users(username, secret_password, complete_name, id_role) 
                                     VALUES(:username, :secret_password, :complete_name, :id_role)");
 
-            $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
-            $stmt->bindParam(':secret_password', $this->getSecretPassword(), PDO::PARAM_STR);
-            $stmt->bindParam(':complete_name', $this->getCompleteName(), PDO::PARAM_STR);
-            $stmt->bindParam(':id_role', $this->getIdRole(), PDO::PARAM_INT);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':secret_password', $secret_password, PDO::PARAM_STR);
+            $stmt->bindParam(':complete_name', $completeName, PDO::PARAM_STR);
+            $stmt->bindParam(':id_role', $idRole, PDO::PARAM_INT);
 
             
             if ($stmt->execute())
@@ -68,26 +73,19 @@ class UserModel extends UserD implements IModel
 
     public function get($id)
     {
-        $items = [];
-
         try 
         {
-            $stmt = $this->prepares('SELECT * FROM users WHERE id = :id');
+            $stmt = $this->prepares('SELECT * FROM users WHERE id_user = :id');
             $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($stmt->execute())
-            {
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $users = new UserModel();
+            $item = $users->from($user);
 
-                $users = new UserModel();
-                $item = $users->from($user);
-
-                return $item;
-            }
-            else
-            {
-                return NULL;
-            }
+            return $item;
+            
         } 
         catch (PDOException $e) 
         {
@@ -149,13 +147,14 @@ class UserModel extends UserD implements IModel
     {
         try 
         {
-            $this->setId($array['id']);
+            $this->setId($array['id_user']);
             $this->setUsername($array['username']);
-            $this->setSecretPassword($array['password']);
-            $this->setCompleteName($array['namecomplete']);
-            $this->setIdRole($array['role']);
+            $this->setSecretPassword($array['secret_password']);
+            $this->setCompleteName($array['complete_name']);
+            $this->setIdRole($array['id_role']);
             $this->setToken($array['token']);
-            $this->setStatus($array['status']);
+            $this->setFechaRegistro($array['fecha_registro']);
+            $this->setStatus($array['estatus']);
 
             return $this;
         }
@@ -171,7 +170,7 @@ class UserModel extends UserD implements IModel
         try 
         {
             $stmt = $this->prepares('SELECT username FROM users WHERE username = :username');
-            $stmt->bindParam(':usename', $username);
+            $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0)
@@ -203,7 +202,7 @@ class UserModel extends UserD implements IModel
                 $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 $user = new UserModel();
-                $usuario = $user->from($item);
+                $usuario = $this->from($item);
 
                 if (password_verify($password, $usuario->getSecretPassword())) 
                 {

@@ -25,6 +25,7 @@ class SessionController extends Controller
     {
         error_log('init');
         $this->session = new Session();
+        $this->user = new UserModel();
 
         $json = $this->getJSONFileConfig();
 
@@ -56,7 +57,6 @@ class SessionController extends Controller
 
             if ($this->isPublic()) 
             {
-                
                 error_log('entra ispublic');
                 $this->redirectDefaultSiteByRole($role);
             }
@@ -109,9 +109,6 @@ class SessionController extends Controller
     {
         $id = $this->session->getCurrentUser();
 
-        $this->user = new UserModel();
-        $this->user->get($id);
-
         error_log('SESSIONCONTROLLER::getUserSessionData -> ' . $id);
 
         return $this->user->get($id);
@@ -144,8 +141,8 @@ class SessionController extends Controller
         $actualLink = trim("$_SERVER[REQUEST_URI]");
         $url = explode('/', $actualLink);
 
-        error_log('SESSIONCONTROLLER::GETCurrentPage -> ' . $url[2]);
-        return $url[2];
+        error_log('SESSIONCONTROLLER::GETCurrentPage -> ' . $url[6]);
+        return $url[6];
     }
 
     private function redirectDefaultSiteByRole($role)
@@ -184,18 +181,18 @@ class SessionController extends Controller
     {
         $this->session->setCurrentUser($user->getId());
         error_log('id' . $user->getId());
-        $this->authorizeAccess($user->getRole());
+        $this->authorizeAccess($user->getIdRole());
     }
 
     public function authorizeAccess($role)
     {
         switch ($role) 
         {
-            case 'user':
-                $this->redirect($this->defaultSites['user'], []);
+            case '2':
+                $this->redirect($this->defaultSites['2'], []);
                 break;
-            case 'admin':
-                $this->redirect($this->defaultSites['admin'], []);
+            case '1':
+                $this->redirect($this->defaultSites['1'], []);
                 break;
         }
     }

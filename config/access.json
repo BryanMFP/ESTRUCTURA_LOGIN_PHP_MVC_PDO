@@ -12,7 +12,7 @@
             "role" : ""
         },
         {
-            "site" : "main",
+            "site" : "principal",
             "access" : "private",
             "role" : "2"
         }
@@ -20,7 +20,7 @@
 
     "default-sites":
     {
-        "2" : "main",
+        "2" : "principal",
         "1" : "admin"
     }
     

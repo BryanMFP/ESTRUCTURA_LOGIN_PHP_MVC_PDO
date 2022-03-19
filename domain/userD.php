@@ -1,5 +1,7 @@
 <?php
 
+// require 'libs/imodel.php';
+
 class UserD extends Model 
 {
     private $id;
@@ -8,6 +10,7 @@ class UserD extends Model
     private $completename;
     private $idrole;
     private $token;
+    private $fechaRegistro;
     private $status;
 
     public function __construct() 
@@ -94,6 +97,16 @@ class UserD extends Model
         {
             $this->token = $token;
         }
+    }
+
+    public function getFechaRegistro()
+    {
+        return $this->fechaRegistro;
+    }
+
+    public function setFechaRegistro($fechaRegistro)
+    {
+        $this->fechaRegistro = $fechaRegistro;
     }
 
     public function getStatus()

@@ -7,6 +7,8 @@
     <title>Principal</title>
 </head>
 <body>
-    
+    <h1>Bienvenido <?= $this->d['user']->getUsername() ?></h1>
+    <div>Hola Mundo</div>
+    <li><a href="logout">Cerrar sesión</a></li>
 </body>
 </html>

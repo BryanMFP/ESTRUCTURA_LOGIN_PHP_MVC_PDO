@@ -1,8 +1,9 @@
+DROP DATABASE IF EXISTS base_test;
 CREATE DATABASE base_test;
 USE base_test;
 
 CREATE TABLE rols(
-id_rol INT PRIMARY KEY AUTO_INCREMENT,
+id_role INT PRIMARY KEY AUTO_INCREMENT,
 rol_name VARCHAR(45) NOT NULL,
 estatus VARCHAR(5)
 )Engine=InnoDB;
@@ -12,7 +13,7 @@ id_user INT PRIMARY KEY AUTO_INCREMENT,
 username VARCHAR(45) NOT NULL,
 secret_password VARCHAR(100) UNIQUE NOT NULL,
 complete_name VARCHAR(200),
-id_rol INT NOT NULL DEFAULT 2,
+id_role INT NOT NULL DEFAULT 2,
 token VARCHAR(100) UNIQUE DEFAULT NULL,
 fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 estatus VARCHAR(5) DEFAULT 'A'
@@ -36,8 +37,8 @@ DELIMITER ;
 
 INSERT INTO rols(rol_name, estatus) VALUES('admin', 'A'),('user', 'A');
 
-SELECT * FROM users;
-SELECT * FROM login_register;
+/*SELECT * FROM users;
+SELECT * FROM login_register;*/
 
 /*
 SET FOREIGN_KEY_CHECKS=0;

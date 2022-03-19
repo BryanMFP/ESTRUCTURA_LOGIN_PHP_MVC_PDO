@@ -14,30 +14,39 @@ class Main extends SessionController
         $this->view->render('main/index', []);
     }
 
+    public function signup()
+    {
+        $this->view->render('main/signup', []);
+    }
+
     public function authenticate()
     {
+        error_log('getPost ' . $this->getPost('username') . '  ' . $this->getPost('password'));
         if ($this->existPOST(['username', 'password'])) 
         {
+
             $username = $this->getPost('username');
             $password = $this->getPost('password');
 
             if(($username == '' || empty($username)) || ($password == '' || empty($password)))
             {
-                $this->redirect('',
+                error_log("vacio");
+                $this->redirect('main',
                 [
                     'error' => Errors::ERROR_LOGIN_AUTHENTICATE_EMPTY
                 ]);
             }
-
-            $user = $this->model->login($username, $password);
+            $user = new UserModel();
+            $user->login($username, $password);
 
             if ($user != NULL)
             {
+                error_log('initialize');
                 $this->initialize($user);
             }
             else
             {
-                $this->redirect('',
+                $this->redirect('main',
                 [
                     'error' => Errors::ERROR_LOGIN_AUTHENTICATE_DATA
                 ]);
@@ -45,7 +54,7 @@ class Main extends SessionController
         }
         else
         {
-            $this->redirect('',
+            $this->redirect('main',
                 [
                     'error' => Errors::ERROR_LOGIN_AUTHENTICATE
                 ]);
@@ -54,28 +63,30 @@ class Main extends SessionController
 
     public function newUser()
     {
-        if($this->existPOST(['username', 'password', 'idrole']))
+        if($this->existPOST(['username', 'password', 'idrole','completename']))
         {
             $username = $this->getPost('username');
             $password = $this->getPost('password');
-            $role = $this->getPost('role');
+            $completeName = $this->getPost('completename');
+            $role = $this->getPost('idrole');
             
             $user = new UserModel();
 
             $user->setUsername($username);
             $user->setSecretPassword($password, true);
+            $user->setCompleteName($completeName);
             $user->setIdRole($role);
             
-            if(($username == '' || empty($username)) || ($password == '' || empty($password)) || ($role == '' || empty($role)))
+            if(($username == '' || empty($username)) || ($password == '' || empty($password)) || ($role == '' || empty($role)) || ($completeName == '' || empty($completeName)))
             {
-                $this->redirect('signup',
+                $this->redirect('main/signup',
                 [
                     'error' => Errors::ERROR_SIGNUP_NEWUSER_EMPTY
                 ]);
             }
             elseif ($user->exists($username))
             {
-                $this->redirect('signup',
+                $this->redirect('main/signup',
                 [
                     'error' => Errors::ERROR_SIGNUP_NEWUSER_EXISTS
                 ]);
@@ -89,7 +100,7 @@ class Main extends SessionController
             }
             else
             {
-                $this->redirect('signup',
+                $this->redirect('main/signup',
                 [
                     'error' => Errors::ERROR_SIGNUP_NEWUSER
                 ]);
@@ -97,7 +108,7 @@ class Main extends SessionController
         }
         else
         {
-            $this->redirect('signup', 
+            $this->redirect('signup/signup', 
             [
                 'error' => Errors::ERROR_SIGNUP_NEWUSER_EXISTS
             ]);

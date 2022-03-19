@@ -1,7 +1,5 @@
 <?php
 
-include_once 'libs/imodel.php';
-
 class Model
 {
     public function __construct() 

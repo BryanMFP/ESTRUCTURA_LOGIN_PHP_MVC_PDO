@@ -8,7 +8,7 @@ class Errores extends Controller
         error_log('Errors::construct -> Inicio de Errores');
         $this->view->render('errores/index', 
         [
-            'error' => Errors::ERROR_PAGE_NOT_EXISTS
+            'error' => 'Ups! pagina no encontrada, ocurrio un error'
         ]);
     }
 
