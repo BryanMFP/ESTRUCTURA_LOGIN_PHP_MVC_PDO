@@ -1,0 +1,18 @@
+[18-Mar-2022 19:06:28 America/Guayaquil] url 0 -> 
+[18-Mar-2022 19:06:28 America/Guayaquil] APP::construct->no hay controlador especificado 
+[18-Mar-2022 19:06:28 America/Guayaquil] controler
+[18-Mar-2022 19:06:28 America/Guayaquil] main antes de construct
+[18-Mar-2022 19:06:28 America/Guayaquil] construct
+[18-Mar-2022 19:06:28 America/Guayaquil] init
+[18-Mar-2022 19:06:28 America/Guayaquil] getjsonfileconfig
+[18-Mar-2022 19:06:28 America/Guayaquil] SESSIONCONTROLLER::validateSession
+[18-Mar-2022 19:06:28 America/Guayaquil] existsSession 1
+[18-Mar-2022 19:06:28 America/Guayaquil] existSession 2
+[18-Mar-2022 19:06:28 America/Guayaquil] caso contrario existsSession
+[18-Mar-2022 19:06:28 America/Guayaquil] SESSIONCONTROLLER::GETCurrentPage -> 
+[18-Mar-2022 19:06:28 America/Guayaquil] currentURL 
+[18-Mar-2022 19:06:28 America/Guayaquil] entrar al for, pasa condiciones
+[18-Mar-2022 19:06:28 America/Guayaquil] site:  access: public
+[18-Mar-2022 19:06:28 America/Guayaquil] entra a isPublic en caso contrario
+[18-Mar-2022 19:06:28 America/Guayaquil] main despues de construct
+[18-Mar-2022 19:06:28 America/Guayaquil] despues de render

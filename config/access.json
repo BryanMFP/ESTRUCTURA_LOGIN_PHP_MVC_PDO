@@ -1,0 +1,27 @@
+{
+    "sites" : 
+    [
+        {
+            "site" : "",
+            "access" : "public",
+            "role" : ""
+        },
+        {
+            "site" : "signup",
+            "access" : "public",
+            "role" : ""
+        },
+        {
+            "site" : "main",
+            "access" : "private",
+            "role" : "2"
+        }
+    ],
+
+    "default-sites":
+    {
+        "2" : "main",
+        "1" : "admin"
+    }
+    
+}
