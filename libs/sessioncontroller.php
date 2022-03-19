@@ -84,7 +84,7 @@ class SessionController extends Controller
             else
             {
                 error_log('redireccion');
-                header('location: ' . constant('URL') . '');
+                header('location: ' . URL . '');
             }
         }
     }
@@ -144,8 +144,8 @@ class SessionController extends Controller
         $actualLink = trim("$_SERVER[REQUEST_URI]");
         $url = explode('/', $actualLink);
 
-        error_log('SESSIONCONTROLLER::GETCurrentPage -> ' . $url[6]);
-        return $url[6];
+        error_log('SESSIONCONTROLLER::GETCurrentPage -> ' . $url[2]);
+        return $url[2];
     }
 
     private function redirectDefaultSiteByRole($role)
@@ -160,7 +160,7 @@ class SessionController extends Controller
             }
         }
 
-        header('location: ' . constant('URL') . $url);
+        header('location: ' . URL . $url);
 
     }
 

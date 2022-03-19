@@ -7,15 +7,16 @@ class DB{
     private $charset;
 
 public function __construct(){
-    $this->host     = 'localhost:3308';
-    $this->db       = 'pelicula';
-    $this->user     = 'root';
-    $this->password = '';
-    $this->charset = 'utf8mb4';
+    $this->host     = HOST;
+    $this->db       = DATABASE;
+    $this->user     = USER;
+    $this->password = PASSWORD;
+    $this->charset  = CHARSET;
     }
 
     public function connect(){
-        try {
+        try 
+        {
             $connection = ("mysql:host=$this->host;dbname=$this->db;charset=$this->charset");
             
             $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -23,9 +24,11 @@ public function __construct(){
                        
             $pdo = new PDO($connection, $this->user, $this->password, $options);
             
-             return $pdo;
-        } catch (PDOException $e) {
-            print_r("Error connection: ". $e-> getMessage());
+            return $pdo;
+        } 
+        catch (PDOException $e) 
+        {
+            error_log("Error connection: ". $e->getMessage());
         }
     }
 }
