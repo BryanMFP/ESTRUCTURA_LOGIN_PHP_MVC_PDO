@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 404</title>
+    <title>Error</title>
 </head>
 <body>
-    <p>
-        Hola
-    </p>
+    <h1>Error</h1>
+    <h3><?= $this->d['error']; ?></h3>
+
+    <div>
+        <a href="" class="btn">Regresar a la pagina de inicio</a>
+    </div>
 </body>
 </html>
