@@ -7,11 +7,11 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Error</h1>
-    <h3><?= $this->d['error']; ?></h3>
-
-    <div>
-        <a href="" class="btn">Regresar a la pagina de inicio</a>
-    </div>
+<?php require 'views/header.php'; ?>
+<div id="main">
+    <h1 class="center error">Ups! Ocurrio un error, vuelve a intentarlo mas tarde</h1>
+</div>
+<input type="button" onclick="history.back()" value="Regresar Atras">
+<?php require 'views/footer.php'; ?>
 </body>
 </html>

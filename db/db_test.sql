@@ -5,7 +5,7 @@ USE base_test;
 CREATE TABLE rols(
 id_role INT PRIMARY KEY AUTO_INCREMENT,
 rol_name VARCHAR(45) NOT NULL,
-estatus VARCHAR(5)
+estatus VARCHAR(5) DEFAULT 'A'
 )Engine=InnoDB;
 
 CREATE TABLE users(
@@ -24,8 +24,10 @@ id_user INT NOT NULL,
 check_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )Engine=InnoDB;
 
-DROP TRIGGER IF EXISTS register_token_new;
+alter table users add constraint fk_users_rols foreign key (id_role) references rols(id_role);
+alter table login_register add constraint fk_register_users foreign key (id_user) references users(id_user);
 
+DROP TRIGGER IF EXISTS register_token_new;
 DELIMITER $$
 CREATE TRIGGER register_token_new
 BEFORE INSERT ON users

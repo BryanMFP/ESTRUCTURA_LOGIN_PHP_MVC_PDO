@@ -225,6 +225,25 @@ class UserModel extends UserD implements IModel
         }
     }
 
+    public function setRegisterLogin($idUser)
+    {
+        error_log('idUser' . $idUser);
+        $stmt = $this->prepares("INSERT INTO login_register(id_user) VALUES(:id_user)");
+        $stmt->bindParam(':id_user', $idUser, PDO::PARAM_INT);
+
+       
+        if ($stmt->execute())
+        {
+            error_log('entra al verdadero');
+            return true;
+        }
+        else
+        {
+            error_log('entra al falso');
+            return false;
+        }
+    }
+
     public function comparePasswords($password, $id)
     {
         try 

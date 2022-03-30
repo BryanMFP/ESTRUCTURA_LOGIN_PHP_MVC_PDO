@@ -7,6 +7,11 @@
             "role" : ""
         },
         {
+            "site" : "main",
+            "access" : "public",
+            "role" : ""
+        },
+        {
             "site" : "signup",
             "access" : "public",
             "role" : ""

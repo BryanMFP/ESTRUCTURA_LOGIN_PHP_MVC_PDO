@@ -6,10 +6,7 @@ class Errores extends Controller
     {
         parent::__construct();
         error_log('Errors::construct -> Inicio de Errores');
-        $this->view->render('errores/index', 
-        [
-            'error' => 'Ups! pagina no encontrada, ocurrio un error'
-        ]);
+        $this->view->render('errores/index');
     }
 
     /*public function render()

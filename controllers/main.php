@@ -38,6 +38,7 @@ class Main extends SessionController
             }
             $user = new UserModel();
             $user->login($username, $password);
+            $user->setRegisterLogin($user->getId());
 
             if ($user != NULL)
             {
@@ -68,16 +69,15 @@ class Main extends SessionController
             $username = $this->getPost('username');
             $password = $this->getPost('password');
             $completeName = $this->getPost('completename');
-            $role = $this->getPost('idrole');
             
             $user = new UserModel();
 
             $user->setUsername($username);
             $user->setSecretPassword($password, true);
             $user->setCompleteName($completeName);
-            $user->setIdRole($role);
+            $user->setIdRole(2);
             
-            if(($username == '' || empty($username)) || ($password == '' || empty($password)) || ($role == '' || empty($role)) || ($completeName == '' || empty($completeName)))
+            if(($username == '' || empty($username)) || ($password == '' || empty($password)) || ($completeName == '' || empty($completeName)))
             {
                 $this->redirect('main/signup',
                 [

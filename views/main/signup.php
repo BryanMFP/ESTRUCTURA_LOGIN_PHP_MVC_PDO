@@ -17,7 +17,6 @@
             <input type="text" name="username" placeholder="Usuario">
             <input type="text" name="completename" placeholder="Name Complete">
             <input type="password" name="password" placeholder="Contraseña">
-            <input type="hidden" name="idrole" value="2">
             <input type="submit" value="Ingresar">
             <div>
                 <a href="<?= URL ?>">Login</a>
